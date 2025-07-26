@@ -6,11 +6,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.BootPie.models.Pie;
 import com.revature.BootPie.services.PieService;
 
 @SpringBootApplication
+@RestController
 public class BootPieApplication {
 
 	@Value("${spring.application.name}")
@@ -18,6 +21,16 @@ public class BootPieApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BootPieApplication.class, args);
+	}
+
+	@GetMapping
+	public String piePickerHttp(PieService pieService) {
+		Pie randomPie = pieService.getRandonPie();
+		if (randomPie != null) {
+			return "Random Pie: " + randomPie;
+		} else {
+			return "No pies available.";
+		}
 	}
 
 	@Bean
