@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PieController {
     private PieService pieService;
 
+    @Autowired
     public PieController(PieService pieService) {
         this.pieService = pieService;
     }
